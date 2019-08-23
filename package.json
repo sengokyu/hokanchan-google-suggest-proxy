@@ -2,7 +2,7 @@
   "name": "hokanchan",
   "version": "1.0.0",
   "description": "This is a sample template for hokanchan - Below is a brief explanation of what we have generated for you:",
-  "main": "index.js",
+  "private": true,
   "dependencies": {},
   "devDependencies": {
     "ts-node": "^8.3.0",
