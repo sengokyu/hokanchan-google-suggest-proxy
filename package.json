@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.31",
     "aws-sam-webpack-plugin": "^0.3.1",
     "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
