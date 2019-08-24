@@ -13,6 +13,8 @@
     "webpack-cli": "^3.3.7"
   },
   "scripts": {
+    "build": "webpack-cli",
+    "watch": "webpack-cli -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
