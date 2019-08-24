@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "This is a sample template for hokanchan - Below is a brief explanation of what we have generated for you:",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "rxjs": "^6.5.2",
+    "xml2js": "^0.4.19"
+  },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.31",
     "@types/jasmine": "^3.4.0",
+    "@types/xml2js": "^0.4.4",
     "aws-sam-webpack-plugin": "^0.3.1",
     "jasmine-core": "^3.4.0",
     "karma": "^4.2.0",
