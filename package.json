@@ -4,6 +4,7 @@
   "description": "This is a sample template for hokanchan - Below is a brief explanation of what we have generated for you:",
   "private": true,
   "dependencies": {
+    "node-fetch": "^2.6.0",
     "rxjs": "^6.5.2",
     "xml2js": "^0.4.19"
   },
