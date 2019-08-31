@@ -37,19 +37,19 @@ describe('parseSuggestionXml', () => {
     });
   });
 
-  it('期待されないXMLは空配列', done => {
+  it('期待されないXMLはundefined', done => {
     const invalidXml =
       '<?xml version="1.0" encoding="UTF-8"?><xmlroot></xmlroot>';
 
     parseSuggestionXml(invalidXml).subscribe(actual => {
-      expect(actual).toEqual([]);
+      expect(actual).toBeUndefined();
       done();
     });
   });
 
-  it('XMLでなければ空配列', done => {
+  it('XMLでなければundefined', done => {
     parseSuggestionXml('').subscribe(actual => {
-      expect(actual).toEqual([]);
+      expect(actual).toBeUndefined();
       done();
     });
   });

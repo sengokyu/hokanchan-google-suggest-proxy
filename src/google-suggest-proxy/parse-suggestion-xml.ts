@@ -6,7 +6,20 @@ export function parseSuggestionXml(xml: string): Observable<string[]> {
 
   parseString(xml, (err, result) => {
     if (err) {
-      subject.error(err);
+      console.error(`XML parse error. ${xml}`);
+      subject.next(undefined);
+      subject.complete();
+      return;
+    }
+
+    if (
+      result === null ||
+      typeof result !== 'object' ||
+      typeof result['toplevel'] === 'undefined' ||
+      typeof result['toplevel']['CompleteSuggestion'] === 'undefined'
+    ) {
+      subject.next(undefined);
+      subject.complete();
       return;
     }
 
@@ -17,8 +30,8 @@ export function parseSuggestionXml(xml: string): Observable<string[]> {
 
       subject.next(dst);
     } catch (ex) {
-      console.log(ex);
-      subject.next([]);
+      console.error(`XML parse failed. ${xml}`);
+      subject.next(undefined);
     }
 
     subject.complete();
