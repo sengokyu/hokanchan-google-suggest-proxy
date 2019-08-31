@@ -25,14 +25,16 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'karma-typescript'],
+    reporters: ['progress', 'karma-typescript', 'kjhtml'],
 
     // web server port
     port: 9876,
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
-
+    client: {
+      clearContext: false // will show the results in browser once all the testcases are loaded
+    },
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
@@ -51,6 +53,8 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity,
+
+    restartOnFileChange: true,
 
     karmaTypescriptConfig: {
       tsconfig: './tsconfig.spec.json'
