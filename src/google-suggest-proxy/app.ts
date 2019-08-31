@@ -39,7 +39,11 @@ const lambdaHandler: APIGatewayProxyHandler = (
         map(suggestions => {
           return {
             statusCode: 200,
-            headers: { 'Access-Control-Allow-Origin': '*' },
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET',
+              'Access-Control-Allow-Headers': '*'
+            },
             body: JSON.stringify(suggestions)
           };
         })
