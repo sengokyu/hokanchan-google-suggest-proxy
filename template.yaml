@@ -4,11 +4,16 @@ Description: >
   hokanchan
 
   Google Suggest API Proxy
-  
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 15
+  Api:
+    Cors:
+      AllowMethods: "'OPTIONS,GET'"
+      AllowHeaders: "'Content-Type'"
+      AllowOrigin: "'*'"
 
 Resources:
   GoogleSuggestProxyFunction:
@@ -29,11 +34,11 @@ Outputs:
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   GoogleSuggestProxyApi:
-    Description: "API Gateway endpoint URL for Prod stage for Google Suggest Proxy function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/suggest/"
+    Description: 'API Gateway endpoint URL for Prod stage for Google Suggest Proxy function'
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/suggest/'
   GoogleSuggestProxyFunction:
-    Description: "Google Suggest Proxy Lambda Function ARN"
+    Description: 'Google Suggest Proxy Lambda Function ARN'
     Value: !GetAtt GoogleSuggestProxyFunction.Arn
   GoogleSuggestProxyFunctionIamRole:
-    Description: "Implicit IAM Role created for Google Suggest Proxy function"
+    Description: 'Implicit IAM Role created for Google Suggest Proxy function'
     Value: !GetAtt GoogleSuggestProxyFunctionRole.Arn
