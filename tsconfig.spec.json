@@ -2,7 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "target": "es5",
-    "types": ["jasmine", "node"]
+    "types": ["jasmine", "node"],
+    "sourceMap": true
   },
   "include": ["src/**/*.spec.ts", "src/**/*.d.ts", "src/**/*.ts"]
 }
