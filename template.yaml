@@ -3,7 +3,7 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   hokanchan
 
-  Sample SAM Template for hokanchan
+  Google Suggest API Proxy
   
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -29,11 +29,11 @@ Outputs:
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   GoogleSuggestProxyApi:
-    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Description: "API Gateway endpoint URL for Prod stage for Google Suggest Proxy function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/suggest/"
   GoogleSuggestProxyFunction:
-    Description: "Hello World Lambda Function ARN"
+    Description: "Google Suggest Proxy Lambda Function ARN"
     Value: !GetAtt GoogleSuggestProxyFunction.Arn
   GoogleSuggestProxyFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
+    Description: "Implicit IAM Role created for Google Suggest Proxy function"
     Value: !GetAtt GoogleSuggestProxyFunctionRole.Arn
