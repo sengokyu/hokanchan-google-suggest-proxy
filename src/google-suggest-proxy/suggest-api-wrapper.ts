@@ -1,7 +1,7 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { Axios } from 'axios-observable';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export class SuggestApiWrapper {
   private static readonly apiUrl = 'https://www.google.com/complete/search';
