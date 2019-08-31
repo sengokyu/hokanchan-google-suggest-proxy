@@ -30,7 +30,11 @@
   "scripts": {
     "build": "webpack-cli",
     "watch": "webpack-cli -w",
-    "test": "karma start"
+    "test": "karma start",
+    "sam:validate": "sam validate --template template.yaml",
+    "sam:package": "npm run build;sam package --template-file .aws-sam/build/template.yaml --s3-bucket lambdastash --output-template-file /tmp/packaged.yaml",
+    "sam:deploy": "sam deploy --template-file /tmp/packaged.yaml --stack-name hokanchan --capabilities CAPABILITY_IAM",
+    "sam:describe": "aws cloudformation describe-stacks --stack-name hokanchan --query 'Stacks[].Outputs[?OutputKey==`GoogleSuggestProxyApi`]' --output table"
   },
   "author": "",
   "license": "ISC"
