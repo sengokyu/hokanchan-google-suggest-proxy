@@ -1,15 +1,9 @@
-import {
-  APIGatewayEvent,
-  Context,
-  APIGatewayProxyResult,
-  APIGatewayProxyHandler
-} from 'aws-lambda';
+import { APIGatewayEvent, APIGatewayProxyHandler, Context } from 'aws-lambda';
 import Axios from 'axios-observable';
+import { map } from 'rxjs/operators';
 import { SuggestApiWrapper } from './suggest-api-wrapper';
 import { SuggestionService } from './suggestion.service';
-import { map } from 'rxjs/operators';
 
-let response: APIGatewayProxyResult;
 const axios = Axios.create({});
 const suggestApi = new SuggestApiWrapper(axios);
 const suggestionService = new SuggestionService(suggestApi);
@@ -43,7 +37,11 @@ const lambdaHandler: APIGatewayProxyHandler = (
       .getSuggestions(q)
       .pipe(
         map(suggestions => {
-          return { statusCode: 200, body: JSON.stringify(suggestions) };
+          return {
+            statusCode: 200,
+            headers: { 'Access-Control-Allow-Origin': '*' },
+            body: JSON.stringify(suggestions)
+          };
         })
       )
       .toPromise();
