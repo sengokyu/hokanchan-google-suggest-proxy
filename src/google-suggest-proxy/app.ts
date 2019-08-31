@@ -4,10 +4,15 @@ import {
   APIGatewayProxyResult,
   APIGatewayProxyHandler
 } from 'aws-lambda';
+import Axios from 'axios-observable';
+import { SuggestApiWrapper } from './suggest-api-wrapper';
+import { SuggestionService } from './suggestion.service';
+import { map } from 'rxjs/operators';
 
-// const axios = require('axios')
-// const url = 'http://checkip.amazonaws.com/';
 let response: APIGatewayProxyResult;
+const axios = Axios.create({});
+const suggestApi = new SuggestApiWrapper(axios);
+const suggestionService = new SuggestionService(suggestApi);
 
 /**
  *
@@ -21,25 +26,31 @@ let response: APIGatewayProxyResult;
  * @returns {Object} object - API Gateway Lambda Proxy Output Format
  *
  */
-const lambdaHandler: APIGatewayProxyHandler = async (
+const lambdaHandler: APIGatewayProxyHandler = (
   event: APIGatewayEvent,
   context: Context
 ) => {
+  if (typeof event.queryStringParameters['q'] === 'undefined') {
+    return { statusCode: 400, body: "No query parameter `q' given." };
+  }
+
+  const q = event.queryStringParameters['q'];
+
+  console.log(`Trying to get suggestions of q=${q}`);
+
   try {
-    // const ret = await axios(url);
-    response = {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'hello world'
-        // location: ret.data.trim()
-      })
-    };
+    return suggestionService
+      .getSuggestions(q)
+      .pipe(
+        map(suggestions => {
+          return { statusCode: 200, body: JSON.stringify(suggestions) };
+        })
+      )
+      .toPromise();
   } catch (err) {
     console.log(err);
     return err;
   }
-
-  return response;
 };
 
 export { lambdaHandler };
