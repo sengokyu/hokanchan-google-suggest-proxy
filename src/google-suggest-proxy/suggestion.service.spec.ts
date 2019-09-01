@@ -1,13 +1,17 @@
 import { AxiosResponse } from 'axios';
 import { of } from 'rxjs';
 import { SuggestionService } from './suggestion.service';
+import { delay } from 'rxjs/operators';
+import { SuggestApiWrapper } from './suggest-api-wrapper';
 
 const letters = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわを'.split(
   ''
 );
 
+const getRandomInt = (): number => Math.floor(Math.random() * 500);
+
 describe('SuggestionService', () => {
-  let suggestApi;
+  let suggestApi: jasmine.SpyObj<SuggestApiWrapper>;
   let instance: SuggestionService;
 
   beforeEach(() => {
@@ -23,7 +27,9 @@ describe('SuggestionService', () => {
     <CompleteSuggestion><suggestion data="hoge fuga"/></CompleteSuggestion>
     </toplevel>`;
 
-    suggestApi.getSuggestion.and.returnValue(of(data));
+    // HTTPリクエストごとにランダムな待ちを入れて、順番を保てないようにする
+    const returnValues = letters.map(_ => of(data).pipe(delay(getRandomInt())));
+    suggestApi.getSuggestion.and.returnValues(...returnValues);
 
     const expected = letters.map(i => {
       return { letter: i, result: ['hoge fuga'] };
