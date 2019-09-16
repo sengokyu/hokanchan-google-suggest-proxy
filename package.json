@@ -30,7 +30,7 @@
   "scripts": {
     "build": "webpack-cli",
     "watch": "webpack-cli -w",
-    "test": "karma start",
+    "test": "karma start projects/backend-google-suggest-proxy/karma.conf.js",
     "sam:validate": "sam validate --template template.yaml",
     "sam:package": "npm run build;sam package --template-file .aws-sam/build/template.yaml --s3-bucket lambdastash --output-template-file /tmp/packaged.yaml",
     "sam:deploy": "sam deploy --template-file /tmp/packaged.yaml --stack-name hokanchan --capabilities CAPABILITY_IAM",

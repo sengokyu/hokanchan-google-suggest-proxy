@@ -19,7 +19,7 @@ Resources:
   GoogleSuggestProxyFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: src/google-suggest-proxy
+      CodeUri: projects/backend-google-suggest-proxy/src/
       Handler: app.lambdaHandler
       Runtime: nodejs8.10
       Events:
