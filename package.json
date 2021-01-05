@@ -4,7 +4,7 @@
   "description": "This is a sample template for hokanchan - Below is a brief explanation of what we have generated for you:",
   "private": true,
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "axios-observable": "^1.1.2",
     "node-fetch": "^2.6.0",
     "rxjs": "^6.5.2",
